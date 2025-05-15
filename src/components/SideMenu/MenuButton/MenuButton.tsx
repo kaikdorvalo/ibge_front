@@ -1,18 +1,17 @@
-import type { JSX } from "react"
-
 interface Props {
     label: string
     action: () => void
-    children: JSX.Element
+    icon: any
+    active: boolean
 }
 
 export const MenuButton = (porps: Props) => {
     return (
-        <button onClick={porps.action} className="w-full rounded-[8px] flex  gap-6 transition-all duration-300 cursor-pointer border border-white/70 px-4 py-3 hover:bg-white hover:text-black" >
-            <div>
-                {porps.children}
-            </div>
+        <button onClick={porps.action} className={`w-full text-black/70 rounded-[8px] flex  gap-6 transition-all duration-300 cursor-pointer border border-black/10 ${porps.active ? "bg-[#174580] text-white" : 'bg-white text-black'} shadow-sm px-4 py-3 hover:bg-[#174580] hover:text-white`} >
+            < div >
+                <porps.icon />
+            </div >
             {porps.label}
-        </button>
+        </button >
     )
 }
