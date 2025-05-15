@@ -1,4 +1,5 @@
 import { type JSX } from "react"
+import { SideMenu } from "../SideMenu/SideMenu"
 
 interface Props {
     children: JSX.Element
@@ -6,12 +7,17 @@ interface Props {
 
 export const PageLayout = (props: Props) => {
     return (
-        <div className="w-full min-h-screen flex flex-col bg-white">
-            <div className="w-full py-5 flex justify-center text-black/70 text-lg shadow-sm">
-                Consumindo serviço do IBGE
+        <div className="w-full min-h-screen flex bg-[#141414]">
+            <div className="flex-grow">
+                <SideMenu />
             </div>
-            <div className="w-full">
-                {props.children}
+            <div className="w-full h-full flex flex-col">
+                <div className="w-full h-[80px] flex justify-center items-center text-white/70 text-lg shadow-sm bg-[#1C1C1C]">
+                    Consumindo serviço do IBGE
+                </div>
+                <div className="w-full min-h-full overflow-x-hidden overflow-y-auto p-6">
+                    {props.children}
+                </div>
             </div>
         </div>
     )
