@@ -34,3 +34,11 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="date"] {
+  -webkit-appearance: none;
+}

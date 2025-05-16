@@ -4,11 +4,12 @@ import { SearchInput } from "../../components/TextInput/SearchInput"
 import { ActionButton } from "../../components/ActionButton/ActionButton";
 import AchieveIMG from "../../assets/images/achieve.png";
 import { DateInput } from "../../components/DateInput/DateInput";
+import { ImageForms } from "../../components/ImageForms/ImageForms";
 
 export const HomePage = () => {
     const [searchName, setSearchName] = useState<string>("");
     const [startDate, setStartDate] = useState<string>("2000-05-03");
-    const [endDate, setEndDate] = useState<string>("2000-05-03");
+    const [endDate, setEndDate] = useState<string>("2010-05-03");
 
 
     function handleSearchNameInput(event: ChangeEvent<HTMLInputElement>) {
@@ -20,46 +21,51 @@ export const HomePage = () => {
     }
 
     function handleEndDateInput(event: ChangeEvent<HTMLInputElement>) {
-        setStartDate(event.target.value)
+        setEndDate(event.target.value)
     }
 
     return (
         <PageLayout title="Ranking de nomes por década">
             <div className="w-full h-full text-black">
                 <div className="w-full h-full flex justify-center items-center">
-                    <div className="flex gap-20">
-                        <div className="w-[400px]">
-                            <img className="" src={AchieveIMG} />
-                        </div>
+                    <ImageForms image={AchieveIMG} >
+                        <div className="w-full flex flex-col gap-5">
+                            <div className="w-full">
+                                <SearchInput
+                                    id="search-ranking"
+                                    label="Primeiro nome"
+                                    placeHolder="Busque por um nome"
+                                    setValue={handleSearchNameInput}
+                                    value={searchName}
+                                ></SearchInput>
+                            </div>
 
-                        <div className="w-[400px] shrink-1 flex flex-col justify-center">
                             <div>
-                                <h2 className="text-lg text-center text-black/60 mb-10">Busque um nome e a decada para ver o ranking</h2>
+                                <DateInput
+                                    id="start-date"
+                                    label="Data inicial"
+                                    value={startDate}
+                                    setValue={handleStartDateInput}
+                                />
                             </div>
 
-                            <div className="w-full flex flex-col gap-5">
-                                <div className="w-full">
-                                    <SearchInput
-                                        placeHolder="Busque por um nome"
-                                        setValue={handleSearchNameInput}
-                                        value={searchName}
-                                    ></SearchInput>
-                                </div>
+                            <div>
+                                <DateInput
+                                    id="end-date"
+                                    label="Data final"
+                                    value={endDate}
+                                    setValue={handleEndDateInput}
+                                />
+                            </div>
 
-                                <div>
-                                    <DateInput value={startDate} setValue={handleStartDateInput} />
-                                </div>
-
-                                <div>
-                                    <DateInput value={endDate} setValue={handleEndDateInput} />
-                                </div>
-
-                                <div className="w-full h-10">
-                                    <ActionButton action={() => { }} text="Buscar" />
-                                </div>
+                            <div className="w-full h-10">
+                                <ActionButton
+                                    action={() => { }}
+                                    text="Buscar"
+                                />
                             </div>
                         </div>
-                    </div>
+                    </ImageForms>
                 </div>
 
             </div>

@@ -9,7 +9,7 @@ interface Props {
 export const PageLayout = (props: Props) => {
 
     return (
-        <div className="w-full min-h-screen flex bg-white">
+        <div className="w-full min-h-dvh flex bg-white">
             <div className="flex-grow">
                 <SideMenu />
             </div>
