@@ -27,6 +27,7 @@ export const DecadeInput = (props: Props) => {
                     <ActionButton
                         action={() => { handleDecadeButton('decrement') }}
                         text={"<"}
+                        fill={true}
                     ></ActionButton>
                 </div>
                 <input
@@ -40,6 +41,7 @@ export const DecadeInput = (props: Props) => {
                     <ActionButton
                         action={() => { handleDecadeButton('increment') }}
                         text={">"}
+                        fill={true}
                     ></ActionButton>
                 </div>
             </div>
