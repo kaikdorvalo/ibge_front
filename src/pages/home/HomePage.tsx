@@ -19,6 +19,7 @@ export const HomePage = () => {
     const [endDecade, setEndDecade] = useState<string>('2000');
 
     const [ranking, setRanking] = useState<NameRanking | null>(null);
+    const [periodAvg, setPeriodAvg] = useState<number>(0);
 
     const api = useApi();
 
@@ -46,17 +47,38 @@ export const HomePage = () => {
     }
 
     async function searchRanking() {
+        if (startDecade >= endDecade) return;
+
         if (searchName.length !== 0) {
             const ranking = await api.getNameRnaking(searchName)
+            console.log(ranking)
             const nameRanking = adaptRanking(ranking)
+
 
             nameRanking.periods = nameRanking.periods.filter((period: Period) => period.startDecade >= Number(startDecade) && period.endDecade <= Number(endDecade))
             setRanking(nameRanking)
         }
     }
 
+    function calculatePeriodAvg(): number {
+        let sum = 0;
+        let avarage = 0;
+        if (ranking) {
+            for (let period of ranking.periods) {
+                sum += period.frequency
+            }
+
+            if (sum > 0) {
+                avarage = sum / ranking.periods.length
+            }
+        }
+
+        return avarage
+    }
+
     function getChartData(): number[] {
         if (ranking) {
+            console.log(ranking.periods.length)
             const frequencies: number[] = []
             frequencies.push(0)
             for (let period of ranking.periods) {
@@ -70,13 +92,12 @@ export const HomePage = () => {
     }
 
     function getChartPeriod(): number[] {
-        if (ranking) {
+        if (ranking && ranking.periods.length > 0) {
             const periods: number[] = []
             for (let period of ranking.periods) {
                 periods.push(period.startDecade)
             }
 
-            console.log(ranking)
             periods.push(ranking.periods[ranking.periods.length - 1].endDecade);
 
             return periods
@@ -103,8 +124,9 @@ export const HomePage = () => {
     }
 
     useEffect(() => {
-        console.log(getChartData())
-        console.log(getChartPeriod())
+        if (ranking) {
+            setPeriodAvg(calculatePeriodAvg());
+        }
     }, [ranking])
 
     return (
@@ -169,11 +191,11 @@ export const HomePage = () => {
                             <div className="flex flex-wrap sm:flex-nowrap gap-5">
                                 <CardInfo
                                     label="Nome buscado"
-                                    value="Kaik"
+                                    value={searchName}
                                 />
                                 <CardInfo
                                     label="Média no período"
-                                    value="5.000"
+                                    value={periodAvg.toFixed(2)}
                                 />
                             </div>
 
