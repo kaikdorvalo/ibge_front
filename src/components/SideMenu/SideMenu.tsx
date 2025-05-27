@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { MenuButton } from "./MenuButton/MenuButton"
 import type { MenuRoute } from "./types/MenuRoute";
 import { menuItens } from "./config/menu-itens";
@@ -9,6 +9,7 @@ export const SideMenu = () => {
     const [menuVisible, setMenuVisible] = useState<boolean>(false);
 
     const location = useLocation();
+    const navigation = useNavigate();
 
     function renderRoutes(routes: MenuRoute[]) {
         return routes.map((route) => {
@@ -16,7 +17,7 @@ export const SideMenu = () => {
             const routeActive = `/${currentPath}` == route.path;
             return (
                 <li key={route.path}>
-                    <MenuButton action={() => { }} active={routeActive} label={route.label} icon={route.icon} />
+                    <MenuButton action={() => { navigation(route.path) }} active={routeActive} label={route.label} icon={route.icon} />
                 </li>
             )
         })
