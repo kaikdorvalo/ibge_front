@@ -14,5 +14,10 @@ export const useBackApi = () => ({
     getTopNames: async (location: number) => {
         const ufs = await api.get(`trend/top-names`, { params: { localidade: location } });
         return ufs;
+    },
+
+    getNomeComparison: async (name1: string, name2: string) => {
+        const comparison = await api.get(`comparison`, { params: { name1: name1, name2: name2 } })
+        return comparison
     }
 })
