@@ -38,7 +38,7 @@ export const SideMenu = () => {
             <aside className={`fixed lg:static bg-[#f7f7f7] w-[300px] ${menuVisible ? "ms-[0px]" : "ms-[-300px]"} lg:ms-[0px] h-full border-e border-black/10 transition-all duration-300`}>
                 <div className="w-full px-4 mb-10">
                     <div className="h-[80px] flex justify-center items-center font-bold text-xl">
-                        <span className="text-black/70">Clonador de Cartão</span>
+                        <span className="text-black/70">Trabalho IBGE</span>
                     </div>
                     <ul className="py-6 flex flex-col gap-3">
                         {renderRoutes(menuItens)}
